@@ -1,0 +1,3 @@
+version: 1
+commands:
+  install: 42

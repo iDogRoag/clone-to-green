@@ -1,0 +1,11 @@
+version: 1
+profile: custom
+commands:
+  install: npm ci
+  build:
+    - npm
+    - run
+    - build
+  test: npm test
+env:
+  NODE_ENV: test

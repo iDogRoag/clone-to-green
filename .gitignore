@@ -1,0 +1,9 @@
+node_modules/
+dist/
+coverage/
+.DS_Store
+*.log
+ctg-report.*
+.env
+.env.*
+!.env.example
