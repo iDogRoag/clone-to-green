@@ -37,6 +37,51 @@ describe('cli', () => {
     expect(JSON.parse(stdout).tools).toEqual(expect.arrayContaining([expect.objectContaining({ name: 'node' })]));
   });
 
+  test('demo prints a default report without requiring a target repo', async () => {
+    let stdout = '';
+    const exitCode = await runCli(['node', 'ctg', 'demo', '--format', 'json'], {
+      stdout: (chunk) => {
+        stdout += chunk;
+      },
+      stderr: () => {}
+    });
+
+    const report = JSON.parse(stdout);
+    expect(exitCode).toBe(1);
+    expect(report.source.input).toContain('examples/node-missing-tests');
+    expect(report.result.status).toBe('red');
+    expect(report.reproducibility.penalties.map((penalty: { id: string }) => penalty.id)).toContain('no_real_test_command');
+  });
+
+  test('demo --green uses the bundled passing example', async () => {
+    let stdout = '';
+    const exitCode = await runCli(['node', 'ctg', 'demo', '--green', '--format', 'json'], {
+      stdout: (chunk) => {
+        stdout += chunk;
+      },
+      stderr: () => {}
+    });
+
+    const report = JSON.parse(stdout);
+    expect(exitCode).toBe(0);
+    expect(report.source.input).toContain('examples/node-green');
+    expect(report.result.status).toBe('green');
+  });
+
+  test('demo --badge prints markdown badge text', async () => {
+    let stdout = '';
+    const exitCode = await runCli(['node', 'ctg', 'demo', '--badge'], {
+      stdout: (chunk) => {
+        stdout += chunk;
+      },
+      stderr: () => {}
+    });
+
+    expect(exitCode).toBe(0);
+    expect(stdout).toContain('![Clone To Green]');
+    expect(stdout).toContain('clone--to--green');
+  });
+
   test('run treats missing tests as red by default', async () => {
     let stdout = '';
     const exitCode = await runCli(['node', 'ctg', 'run', `${fixture}node-no-tests`, '--no-install', '--format', 'json'], {

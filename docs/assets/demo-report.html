@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clone To Green Demo Report</title>
+  <style>
+    body { font-family: ui-sans-serif, system-ui, sans-serif; margin: 2rem; color: #17202a; }
+    main { max-width: 820px; }
+    .card { border: 1px solid #d8dee4; border-radius: 8px; padding: 1rem; margin: 1rem 0; }
+    code, pre { background: #f6f8fa; border-radius: 6px; padding: 0.75rem; display: block; overflow: auto; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Clone To Green</h1>
+    <div class="card">
+      <p><strong>Status:</strong> red</p>
+      <p><strong>Reproducibility score:</strong> 61 out of 100</p>
+      <p><strong>Detected project:</strong> Node</p>
+      <p><strong>Package manager:</strong> npm</p>
+    </div>
+    <h2>Why it did not reach green</h2>
+    <ul>
+      <li>No real test command was detected</li>
+      <li>package-lock.json is missing</li>
+      <li>.env.example exists but no env file was provided</li>
+    </ul>
+    <h2>Next step</h2>
+    <pre>npx clone-to-green init .</pre>
+  </main>
+</body>
+</html>

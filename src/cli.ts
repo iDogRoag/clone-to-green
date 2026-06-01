@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { writeFile } from 'node:fs/promises';
 import { isAbsolute, join } from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { Command, CommanderError, InvalidArgumentError } from 'commander';
 import { loadConfigForRoot } from './config.js';
 import { detectProject } from './detect.js';
@@ -64,6 +64,14 @@ type CommonOptions = {
 type InitOptions = {
   force?: boolean;
   profile: Profile;
+};
+
+type DemoOptions = {
+  green?: boolean;
+  red?: boolean;
+  badge?: boolean;
+  format: OutputFormat;
+  output?: string;
 };
 
 const ioDefaults: Required<CliIo> = {
@@ -140,6 +148,18 @@ Exit codes:
       requestedExitCode = await handleDoctor(options.format, streams);
     });
 
+  program
+    .command('demo')
+    .description('Run a bundled demo report without needing a target repo.')
+    .option('--green', 'show a passing demo repo')
+    .option('--red', 'show a failing or missing-tests demo repo')
+    .option('--badge', 'print a Markdown status badge')
+    .option('--format <format>', 'table, json, markdown, or html', parseFormat, 'table')
+    .option('--output <file>', 'write the demo report to a file')
+    .action(async (options: DemoOptions) => {
+      requestedExitCode = await handleDemo(options, streams);
+    });
+
   try {
     await program.parseAsync(argv);
     return requestedExitCode;
@@ -150,6 +170,30 @@ Exit codes:
     streams.stderr(`${error instanceof Error ? error.message : String(error)}\n`);
     return 2;
   }
+}
+
+async function handleDemo(options: DemoOptions, io: Required<CliIo>): Promise<number> {
+  if (options.badge) {
+    const status = options.green ? 'green' : 'red';
+    const color = status === 'green' ? 'brightgreen' : 'red';
+    io.stdout(`![Clone To Green](https://img.shields.io/badge/clone--to--green-${status}-${color})\n`);
+    return 0;
+  }
+
+  const example = options.green ? 'node-green' : 'node-missing-tests';
+  const source = bundledExamplePath(example);
+  return handleRun(
+    source,
+    {
+      ...defaultCommonOptions(),
+      format: options.format,
+      output: options.output,
+      install: options.green ? true : false,
+      allowNoTests: false,
+      failOnYellow: false
+    },
+    io
+  );
 }
 
 async function handleRun(sourceInput: string, options: CommonOptions, io: Required<CliIo>): Promise<number> {
@@ -450,6 +494,19 @@ function addRunLikeOptions(command: Command): Command {
     .option('--fail-on-yellow', 'exit 1 when the final status is yellow');
 }
 
+function defaultCommonOptions(): CommonOptions {
+  return {
+    format: 'table',
+    profile: 'auto',
+    timeout: 900,
+    stepTimeout: 300,
+    env: [],
+    install: true,
+    build: true,
+    test: true
+  };
+}
+
 function normalizeCommonOptions(options: CommonOptions): CommonOptions {
   return {
     ...options,
@@ -551,6 +608,10 @@ ${results
 </body>
 </html>
 `;
+}
+
+function bundledExamplePath(name: string): string {
+  return fileURLToPath(new URL(`../examples/${name}`, import.meta.url));
 }
 
 function escapeHtml(value: string): string {
