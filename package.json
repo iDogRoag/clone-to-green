@@ -5,6 +5,14 @@
   "type": "module",
   "license": "MIT",
   "author": "Clone To Green contributors",
+  "homepage": "https://github.com/iDogRoag/clone-to-green#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iDogRoag/clone-to-green.git"
+  },
+  "bugs": {
+    "url": "https://github.com/iDogRoag/clone-to-green/issues"
+  },
   "engines": {
     "node": "^24.0.0"
   },
