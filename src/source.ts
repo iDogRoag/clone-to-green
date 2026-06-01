@@ -17,6 +17,15 @@ const COPY_EXCLUDES = new Set([
 ]);
 
 export async function resolveSource(input = '.'): Promise<SourceInfo> {
+  const resolved = resolve(input);
+  if (await pathExists(resolved)) {
+    const sourceStat = await stat(resolved);
+    if (!sourceStat.isDirectory()) {
+      throw new Error(`Source must be a directory or git URL: ${input}`);
+    }
+    return { input, kind: 'local', resolved };
+  }
+
   if (isGitHubShorthand(input)) {
     return {
       input,
@@ -29,15 +38,7 @@ export async function resolveSource(input = '.'): Promise<SourceInfo> {
     return { input, kind: 'git', resolved: input };
   }
 
-  const resolved = resolve(input);
-  if (!(await pathExists(resolved))) {
-    throw new Error(`Source does not exist: ${input}`);
-  }
-  const sourceStat = await stat(resolved);
-  if (!sourceStat.isDirectory()) {
-    throw new Error(`Source must be a directory or git URL: ${input}`);
-  }
-  return { input, kind: 'local', resolved };
+  throw new Error(`Source does not exist: ${input}`);
 }
 
 export async function prepareWorkspace(input = '.'): Promise<PreparedWorkspace> {

@@ -3,31 +3,51 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Clone To Green Demo Report</title>
+  <title>Clone To Green Report</title>
   <style>
     body { font-family: ui-sans-serif, system-ui, sans-serif; margin: 2rem; color: #17202a; }
-    main { max-width: 820px; }
-    .card { border: 1px solid #d8dee4; border-radius: 8px; padding: 1rem; margin: 1rem 0; }
-    code, pre { background: #f6f8fa; border-radius: 6px; padding: 0.75rem; display: block; overflow: auto; }
+    main { max-width: 920px; }
+    .cards { display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin: 1rem 0; }
+    .card { border: 1px solid #d8dee4; border-radius: 8px; padding: 0.75rem; }
+    .label { color: #57606a; font-size: 0.85rem; margin: 0 0 0.25rem; }
+    .value { font-size: 1.35rem; font-weight: 700; margin: 0; }
+    table { border-collapse: collapse; width: 100%; margin-top: 1rem; }
+    th, td { border: 1px solid #d8dee4; padding: 0.55rem; text-align: left; }
+    th { background: #f6f8fa; }
+    code { background: #f6f8fa; padding: 0.1rem 0.25rem; border-radius: 4px; }
   </style>
 </head>
 <body>
   <main>
-    <h1>Clone To Green</h1>
-    <div class="card">
-      <p><strong>Status:</strong> red</p>
-      <p><strong>Reproducibility score:</strong> 61 out of 100</p>
-      <p><strong>Detected project:</strong> Node</p>
-      <p><strong>Package manager:</strong> npm</p>
-    </div>
-    <h2>Why it did not reach green</h2>
-    <ul>
-      <li>No real test command was detected</li>
-      <li>package-lock.json is missing</li>
-      <li>.env.example exists but no env file was provided</li>
-    </ul>
-    <h2>Next step</h2>
-    <pre>npx clone-to-green init .</pre>
+    <h1>Clone To Green Report</h1>
+    <p><strong>Status:</strong> RED</p>
+    <p><strong>Summary:</strong> No test command was detected. Add one or pass --allow-no-tests to mark this as yellow.</p>
+    <p><strong>Source:</strong> <code>&lt;package&gt;/examples/node-missing-tests</code></p>
+    <p><strong>Workspace:</strong> <code>&lt;temp&gt;/clone-to-green-.../node-missing-tests</code></p>
+    <p><strong>Profile:</strong> <code>node</code></p>
+    <section class="cards" aria-label="Reproducibility summary">
+      <div class="card"><p class="label">Status</p><p class="value">RED</p></div>
+      <div class="card"><p class="label">Reproducibility score</p><p class="value">15/100</p></div>
+      <div class="card"><p class="label">Confidence</p><p class="value">weak</p></div>
+    </section>
+    <h2>Reproducibility Penalties</h2>
+    <table>
+      <thead><tr><th>Penalty</th><th>Points</th><th>Message</th></tr></thead>
+      <tbody>
+        <tr><td>No real test command</td><td>45</td><td>No real test command was detected.</td></tr>
+        <tr><td>No lockfile</td><td>25</td><td>Node project has no recognized package manager lockfile.</td></tr>
+        <tr><td>No config file</td><td>15</td><td>No clone-to-green config file was found.</td></tr>
+      </tbody>
+    </table>
+    <h2>Steps</h2>
+    <table>
+      <thead><tr><th>Step</th><th>Status</th><th>Command</th><th>Duration</th></tr></thead>
+      <tbody>
+        <tr><td>install</td><td>skipped</td><td><code>npm install</code></td><td>0ms</td></tr>
+        <tr><td>build</td><td>skipped</td><td><code></code></td><td>0ms</td></tr>
+        <tr><td>test</td><td>skipped</td><td><code></code></td><td>0ms</td></tr>
+      </tbody>
+    </table>
   </main>
 </body>
 </html>

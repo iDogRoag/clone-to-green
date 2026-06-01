@@ -9,7 +9,7 @@ describe('launch-ready README', () => {
     expect(firstScreen).toContain('Can a stranger clone your repo and get green?');
     expect(firstScreen).toContain('npx clone-to-green run .');
     expect(firstScreen).toContain('npx clone-to-green demo');
-    expect(firstScreen).toContain('Reproducibility score 61 out of 100');
+    expect(firstScreen).toContain('Reproducibility score: 15 out of 100');
     expect(firstScreen).toContain('npx clone-to-green demo --format html --output ctg-demo.html');
   });
 

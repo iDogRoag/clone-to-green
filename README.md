@@ -16,26 +16,23 @@ npx clone-to-green demo
 ```
 
 ```text
-Clone To Green
+Clone To Green RED
+No test command was detected. Add one or pass --allow-no-tests to mark this as yellow.
 
-Status red
-Reproducibility score 61 out of 100
-Detected project Node
-Package manager npm
-Install passed
-Build skipped
-Tests missing
-Duration 7.4s
+Source: <package>/examples/node-missing-tests
+Status: RED
+Reproducibility score: 15 out of 100
+Confidence: weak
+Detected project: node
+Package manager: npm
+Commands run: 0
+Duration: 0ms
+Workspace: <temp>/clone-to-green-.../node-missing-tests
 
-Why it did not reach green
-
-No real test command was detected
-package-lock.json is missing
-.env.example exists but no env file was provided
-
-Next step
-
-Run npx clone-to-green init . to create a config.
+Steps:
+  install skipped  npm install
+  build   skipped  -
+  test    skipped  -
 ```
 
 ```sh
