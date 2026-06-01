@@ -17,8 +17,8 @@
     "node": "^24.0.0"
   },
   "bin": {
-    "clone-to-green": "./dist/cli.js",
-    "ctg": "./dist/cli.js"
+    "clone-to-green": "dist/cli.js",
+    "ctg": "dist/cli.js"
   },
   "exports": {
     ".": {
