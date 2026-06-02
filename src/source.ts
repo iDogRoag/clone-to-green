@@ -1,5 +1,5 @@
 import { cp, mkdir, stat } from 'node:fs/promises';
-import { basename, join, resolve } from 'node:path';
+import { basename, join, relative, resolve } from 'node:path';
 import { execa } from 'execa';
 import type { PreparedWorkspace, SourceInfo } from './types.js';
 import { pathExists } from './utils/fs.js';
@@ -76,7 +76,11 @@ async function copyLocalSource(sourcePath: string, workspacePath: string): Promi
   await cp(sourcePath, workspacePath, {
     recursive: true,
     filter: (path) => {
-      const parts = path.split(/[\\/]/);
+      const relativePath = relative(sourcePath, path);
+      if (!relativePath) {
+        return true;
+      }
+      const parts = relativePath.split(/[\\/]/);
       return !parts.some((part) => COPY_EXCLUDES.has(part));
     }
   });

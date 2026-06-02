@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1
+
+- Fixed npm-installed CLI execution when npm invokes the binary through a `.bin` symlink.
+- Fixed bundled demo copying after npm installation, where package paths include `node_modules`.
+
 ## 0.1.0
 
 - Initial public version.

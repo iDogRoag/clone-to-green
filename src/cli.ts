@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { realpathSync } from 'node:fs';
 import { writeFile } from 'node:fs/promises';
 import { isAbsolute, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -623,7 +624,20 @@ function escapeHtml(value: string): string {
     .replaceAll("'", '&#39;');
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+function isCliEntrypoint(): boolean {
+  if (!process.argv[1]) {
+    return false;
+  }
+  try {
+    const invokedPath = pathToFileURL(realpathSync(process.argv[1])).href;
+    const modulePath = pathToFileURL(realpathSync(fileURLToPath(import.meta.url))).href;
+    return invokedPath === modulePath;
+  } catch {
+    return import.meta.url === pathToFileURL(process.argv[1]).href;
+  }
+}
+
+if (isCliEntrypoint()) {
   runCli(process.argv).then((code) => {
     process.exitCode = code;
   });
