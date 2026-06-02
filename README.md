@@ -7,6 +7,8 @@ Check whether a repo can go from fresh clone to passing tests with no hidden loc
 Clone To Green creates a clean workspace, detects install and test commands, runs them, and reports whether the repo reached green.
 It also explains fragile setup, missing tests, missing lockfiles, env assumptions, and reproducibility risks.
 
+![Clone To Green demo screenshot](docs/assets/demo.png)
+
 ```sh
 npx clone-to-green run .
 ```
