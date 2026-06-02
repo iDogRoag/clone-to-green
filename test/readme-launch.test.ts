@@ -13,6 +13,19 @@ describe('launch-ready README', () => {
     expect(firstScreen).toContain('npx clone-to-green demo --format html --output ctg-demo.html');
   });
 
+  test('keeps launch formatting and demo links polished', async () => {
+    const readme = await readFile('README.md', 'utf8');
+
+    expect(readme.split('\n').length).toBeGreaterThan(80);
+    expect(readme).toContain('```sh\nnpx clone-to-green run .\n```');
+    expect(readme).toContain('```sh\nnpx clone-to-green demo\n```');
+    expect(readme).toContain('```yaml\nname: Clone To Green');
+    expect(readme).toContain('```sh\nnpx clone-to-green run . --format table');
+    expect(readme).not.toContain('Terminal GIF coming soon.');
+    expect(readme).toContain('Preview the demo output:');
+    expect(readme).toContain('- Terminal output: [docs/assets/demo-output.txt](docs/assets/demo-output.txt)');
+  });
+
   test('contains the requested launch sections', async () => {
     const readme = await readFile('README.md', 'utf8');
     const sections = [

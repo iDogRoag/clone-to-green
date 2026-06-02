@@ -1,7 +1,7 @@
 {
   "name": "clone-to-green",
-  "version": "0.1.1",
-  "description": "Prove a repo can be cloned from scratch and reach green without hidden local setup.",
+  "version": "0.1.2",
+  "description": "Clean clone reproducibility checker for developer projects.",
   "type": "module",
   "license": "MIT",
   "author": "Clone To Green contributors",
@@ -42,13 +42,20 @@
     "prepack": "npm run build"
   },
   "keywords": [
-    "cli",
-    "oss",
+    "developer-tools",
+    "testing",
     "ci",
-    "repository",
+    "automation",
+    "onboarding",
+    "reproducibility",
+    "fresh-clone",
     "smoke-test",
-    "build",
-    "test"
+    "oss",
+    "nodejs",
+    "python",
+    "go",
+    "rust",
+    "github-actions"
   ],
   "dependencies": {
     "commander": "^12.1.0",

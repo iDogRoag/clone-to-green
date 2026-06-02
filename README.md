@@ -39,9 +39,11 @@ Steps:
 npx clone-to-green demo --format html --output ctg-demo.html
 ```
 
-Demo assets: [terminal output](docs/assets/demo-output.txt), [Markdown report](docs/assets/demo-output.md), [HTML report](docs/assets/demo-report.html).
+Preview the demo output:
 
-Terminal GIF coming soon. Run `npx clone-to-green demo` to see the same output locally.
+- Terminal output: [docs/assets/demo-output.txt](docs/assets/demo-output.txt)
+- Markdown report: [docs/assets/demo-output.md](docs/assets/demo-output.md)
+- HTML report: [docs/assets/demo-report.html](docs/assets/demo-report.html)
 
 ## What is Clone To Green
 
