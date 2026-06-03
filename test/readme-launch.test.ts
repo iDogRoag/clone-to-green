@@ -9,7 +9,7 @@ describe('launch-ready README', () => {
     expect(firstScreen).toContain('Can a stranger clone your repo and get green?');
     expect(firstScreen).toContain('npx clone-to-green run .');
     expect(firstScreen).toContain('npx clone-to-green demo');
-    expect(firstScreen).toContain('Reproducibility score: 15 out of 100');
+    expect(firstScreen).toContain('Reproducibility score: 100 out of 100');
     expect(firstScreen).toContain('npx clone-to-green demo --format html --output ctg-demo.html');
   });
 
@@ -24,11 +24,12 @@ describe('launch-ready README', () => {
     expect(readme).not.toContain('Terminal GIF coming soon.');
     expect(readme).toContain('Preview the demo output:');
     expect(readme).toContain('- Terminal output: [docs/assets/demo-output.txt](docs/assets/demo-output.txt)');
+    expect(readme).toContain('Use `--red` to inspect the missing-tests failure example.');
   });
 
   test('includes publish-readiness docs for the next manual release', async () => {
     await expect(readFile('docs/npm-publish-check.md', 'utf8')).resolves.toContain('npm publish');
-    await expect(readFile('docs/release-v0.1.2.md', 'utf8')).resolves.toContain('Clone To Green v0.1.2');
+    await expect(readFile('docs/release-v0.1.3.md', 'utf8')).resolves.toContain('Clone To Green v0.1.3');
   });
 
   test('contains the requested launch sections', async () => {

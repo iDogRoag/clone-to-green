@@ -47,10 +47,10 @@ describe('cli', () => {
     });
 
     const report = JSON.parse(stdout);
-    expect(exitCode).toBe(1);
-    expect(report.source.input).toContain('examples/node-missing-tests');
-    expect(report.result.status).toBe('red');
-    expect(report.reproducibility.penalties.map((penalty: { id: string }) => penalty.id)).toContain('no_real_test_command');
+    expect(exitCode).toBe(0);
+    expect(report.source.input).toContain('examples/node-green');
+    expect(report.result.status).toBe('green');
+    expect(report.reproducibility.score).toBe(100);
   });
 
   test('demo --green uses the bundled passing example', async () => {
@@ -68,6 +68,22 @@ describe('cli', () => {
     expect(report.result.status).toBe('green');
   });
 
+  test('demo --red uses the bundled missing-tests example', async () => {
+    let stdout = '';
+    const exitCode = await runCli(['node', 'ctg', 'demo', '--red', '--format', 'json'], {
+      stdout: (chunk) => {
+        stdout += chunk;
+      },
+      stderr: () => {}
+    });
+
+    const report = JSON.parse(stdout);
+    expect(exitCode).toBe(1);
+    expect(report.source.input).toContain('examples/node-missing-tests');
+    expect(report.result.status).toBe('red');
+    expect(report.reproducibility.penalties.map((penalty: { id: string }) => penalty.id)).toContain('no_real_test_command');
+  });
+
   test('demo --badge prints markdown badge text', async () => {
     let stdout = '';
     const exitCode = await runCli(['node', 'ctg', 'demo', '--badge'], {
@@ -79,7 +95,7 @@ describe('cli', () => {
 
     expect(exitCode).toBe(0);
     expect(stdout).toContain('![Clone To Green]');
-    expect(stdout).toContain('clone--to--green');
+    expect(stdout).toContain('clone--to--green-green-brightgreen');
   });
 
   test('run treats missing tests as red by default', async () => {

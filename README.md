@@ -18,23 +18,23 @@ npx clone-to-green demo
 ```
 
 ```text
-Clone To Green RED
-No test command was detected. Add one or pass --allow-no-tests to mark this as yellow.
+Clone To Green GREEN
+All required setup commands passed and a real test command ran successfully.
 
-Source: <package>/examples/node-missing-tests
-Status: RED
-Reproducibility score: 15 out of 100
-Confidence: weak
+Source: <package>/examples/node-green
+Status: GREEN
+Reproducibility score: 100 out of 100
+Confidence: strong
 Detected project: node
 Package manager: npm
-Commands run: 0
-Duration: 0ms
-Workspace: <temp>/clone-to-green-.../node-missing-tests
+Commands run: 3
+Duration: <duration>ms
+Workspace: <temp>/clone-to-green-.../node-green
 
 Steps:
-  install skipped  npm install
-  build   skipped  -
-  test    skipped  -
+  install passed   npm ci
+  build   passed   npm run build
+  test    passed   npm test
 ```
 
 ```sh
@@ -91,7 +91,7 @@ npx clone-to-green demo --badge
 
 ## Example output
 
-The default demo shows a missing-tests repo so the failure explanation is easy to understand.
+The default demo shows a passing repo so the first run exits green. Use `--red` to inspect the missing-tests failure example.
 
 ```sh
 npx clone-to-green demo

@@ -174,14 +174,16 @@ Exit codes:
 }
 
 async function handleDemo(options: DemoOptions, io: Required<CliIo>): Promise<number> {
+  const useRedDemo = Boolean(options.red);
+
   if (options.badge) {
-    const status = options.green ? 'green' : 'red';
+    const status = useRedDemo ? 'red' : 'green';
     const color = status === 'green' ? 'brightgreen' : 'red';
     io.stdout(`![Clone To Green](https://img.shields.io/badge/clone--to--green-${status}-${color})\n`);
     return 0;
   }
 
-  const example = options.green ? 'node-green' : 'node-missing-tests';
+  const example = useRedDemo ? 'node-missing-tests' : 'node-green';
   const source = bundledExamplePath(example);
   return handleRun(
     source,
@@ -189,7 +191,7 @@ async function handleDemo(options: DemoOptions, io: Required<CliIo>): Promise<nu
       ...defaultCommonOptions(),
       format: options.format,
       output: options.output,
-      install: options.green ? true : false,
+      install: !useRedDemo,
       allowNoTests: false,
       failOnYellow: false
     },

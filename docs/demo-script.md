@@ -12,9 +12,9 @@ Open a terminal at the Clone To Green repository root.
    clone-to-green demo
    ```
 
-   Explain that the default demo shows what a fragile repo looks like when a stranger tries to get to green.
+   Explain that the default demo shows the clean, successful path.
 
-2. Show a passing repo:
+2. Show the passing repo explicitly:
 
    ```sh
    ctg demo --green

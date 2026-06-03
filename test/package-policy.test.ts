@@ -29,8 +29,8 @@ describe('Node runtime policy', () => {
     await expect(readFile('.node-version', 'utf8')).resolves.toBe('24\n');
     await expect(readFile('.npmrc', 'utf8')).resolves.toBe('engine-strict=true\n');
     expect(packageJson.name).toBe('clone-to-green');
-    expect(packageJson.version).toBe('0.1.2');
-    expect(VERSION).toBe('0.1.2');
+    expect(packageJson.version).toBe('0.1.3');
+    expect(VERSION).toBe('0.1.3');
     expect(packageJson.engines.node).toBe('^24.0.0');
     expect(packageJson.bin).toEqual({
       'clone-to-green': 'dist/cli.js',

@@ -20,32 +20,30 @@
 <body>
   <main>
     <h1>Clone To Green Report</h1>
-    <p><strong>Status:</strong> RED</p>
-    <p><strong>Summary:</strong> No test command was detected. Add one or pass --allow-no-tests to mark this as yellow.</p>
-    <p><strong>Source:</strong> <code>&lt;package&gt;/examples/node-missing-tests</code></p>
-    <p><strong>Workspace:</strong> <code>&lt;temp&gt;/clone-to-green-.../node-missing-tests</code></p>
+    <p><strong>Status:</strong> GREEN</p>
+    <p><strong>Summary:</strong> All required setup commands passed and a real test command ran successfully.</p>
+    <p><strong>Source:</strong> <code>&lt;package&gt;/examples/node-green</code></p>
+    <p><strong>Workspace:</strong> <code>&lt;temp&gt;/clone-to-green-.../node-green</code></p>
     <p><strong>Profile:</strong> <code>node</code></p>
     <section class="cards" aria-label="Reproducibility summary">
-      <div class="card"><p class="label">Status</p><p class="value">RED</p></div>
-      <div class="card"><p class="label">Reproducibility score</p><p class="value">15/100</p></div>
-      <div class="card"><p class="label">Confidence</p><p class="value">weak</p></div>
+      <div class="card"><p class="label">Status</p><p class="value">GREEN</p></div>
+      <div class="card"><p class="label">Reproducibility score</p><p class="value">100/100</p></div>
+      <div class="card"><p class="label">Confidence</p><p class="value">strong</p></div>
     </section>
     <h2>Reproducibility Penalties</h2>
     <table>
       <thead><tr><th>Penalty</th><th>Points</th><th>Message</th></tr></thead>
       <tbody>
-        <tr><td>No real test command</td><td>45</td><td>No real test command was detected.</td></tr>
-        <tr><td>No lockfile</td><td>25</td><td>Node project has no recognized package manager lockfile.</td></tr>
-        <tr><td>No config file</td><td>15</td><td>No clone-to-green config file was found.</td></tr>
+        <tr><td>None</td><td>0</td><td>No reproducibility penalties were detected.</td></tr>
       </tbody>
     </table>
     <h2>Steps</h2>
     <table>
       <thead><tr><th>Step</th><th>Status</th><th>Command</th><th>Duration</th></tr></thead>
       <tbody>
-        <tr><td>install</td><td>skipped</td><td><code>npm install</code></td><td>0ms</td></tr>
-        <tr><td>build</td><td>skipped</td><td><code></code></td><td>0ms</td></tr>
-        <tr><td>test</td><td>skipped</td><td><code></code></td><td>0ms</td></tr>
+        <tr><td>install</td><td>passed</td><td><code>npm ci</code></td><td>&lt;duration&gt;ms</td></tr>
+        <tr><td>build</td><td>passed</td><td><code>npm run build</code></td><td>&lt;duration&gt;ms</td></tr>
+        <tr><td>test</td><td>passed</td><td><code>npm test</code></td><td>&lt;duration&gt;ms</td></tr>
       </tbody>
     </table>
   </main>
