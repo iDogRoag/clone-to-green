@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.2
+
+- Improved README launch polish and demo-output links.
+- Improved npm package description and keywords for discoverability.
+- Added npm publish readiness docs and v0.1.2 release-note draft.
+
 ## 0.1.1
 
 - Fixed npm-installed CLI execution when npm invokes the binary through a `.bin` symlink.

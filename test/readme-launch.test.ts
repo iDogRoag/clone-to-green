@@ -26,6 +26,11 @@ describe('launch-ready README', () => {
     expect(readme).toContain('- Terminal output: [docs/assets/demo-output.txt](docs/assets/demo-output.txt)');
   });
 
+  test('includes publish-readiness docs for the next manual release', async () => {
+    await expect(readFile('docs/npm-publish-check.md', 'utf8')).resolves.toContain('npm publish');
+    await expect(readFile('docs/release-v0.1.2.md', 'utf8')).resolves.toContain('Clone To Green v0.1.2');
+  });
+
   test('contains the requested launch sections', async () => {
     const readme = await readFile('README.md', 'utf8');
     const sections = [
